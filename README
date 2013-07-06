@@ -1,0 +1,45 @@
+"NginX + Node.js + Socket.io + Express" websocket proxying example.
+
+Requirements:
+
+ports 8080 and 8050 must be free.
+
+How to run it:
+
+place the files to any folder on your hdd
+(either check them out to the folder or download the arhive and extract its contents to the folder)
+
+this folder will be referred to as "[Path to the files]"
+
+the open the command prompt from this folder and install the required modules:
+
+npm install socket.io
+npm install express
+
+then open your "nginx.conf", and add the following in the "http" section:
+
+include "[Path to the files]\server.conf";
+
+then open the "server.conf" file and edit the path to static resources:
+
+	location / {
+		root [Path to the files];
+	}
+
+then start the server:
+
+node server.js
+
+and restart NginX.
+
+then go to "http://localhost:8050/application/test" and you should see the "Http works" message.
+
+after that go to "http://localhost:8050/client.html" and you should see the "It works" message pop up.
+
+i've also included a use case which must work but it's broken because of either socket.io or nginx.
+because it's broken you have to create a dedicated entry for each websocket url in your "server.conf" file.
+
+by the way, the "socket.io.js" version may be (and is likely to be) older the socket.io version you've just installed, 
+so you may replace its content with the newer one:
+
+http://localhost:8080/socket.io/socket.io.js

@@ -1,0 +1,20 @@
+<html>
+	<body>
+		<script type="text/javascript" src="/socket.io.js"></script>
+		<script type="text/javascript">
+			var socket = io.connect('http://localhost:8050/websocket')
+			
+			socket.on('connected', function(data) 
+			{
+				alert(data.test)
+			})
+			
+			var non_working_socket = io.connect('http://localhost:8050/application/it_must_work_but_either_socket_io_or_nginx_are_broken')
+			
+			non_working_socket.on('connected', function(data) 
+			{
+				alert(data.test)
+			})
+		</script>
+	</body>
+</html>
